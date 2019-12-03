@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Pokédex</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323&display=swap">
+	<link rel="shortcut icon" type="image/png" href="img/pokemon.png">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header class="page_header">
+		<h1>POKÉDEX</h1>
+		<h3>Gen. 1</h3>
+	</header>
+
+	<div class="main">
+		<ul class='pokemon-list'></ul>
+	</div>
+	<div id="modal-container"></div>
+
+	<!-- promise-polyfill (load before fetch-polyfill)-->
+	<script src="js/promise-polyfill.js"></script>
+	<!-- fetch-polyfill -->
+	<script src="js/fetch-polyfill.js"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>
