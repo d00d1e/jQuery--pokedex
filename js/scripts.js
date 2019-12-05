@@ -9,40 +9,33 @@ var pokeRepository = (function() {
   function showModal(item) {
     $modalContainer.empty();
     
-    var modal = document.createElement('div');
-    modal.classList.add('modal');
+    var $modal = $('<div class="modal"></div>');
 
     //close button to hide modal
-    var closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = ' X ';
-    closeButtonElement.addEventListener('click', hideModal); 
+    var $closeButtonElement = $('<button class="modal-close"></button');
+    $closeButtonElement.text(' X ');
+    $closeButtonElement.on('click', hideModal); 
 
     //pokemon name
-    var nameElement = document.createElement('h1');
-    nameElement.innerText = item.name.charAt(0).toUpperCase() + item.name.slice(1);
+    var $nameElement = $('<h1>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</p>');
 
     //pokemon image
-    var imageElement = document.createElement('img');
-    imageElement.classList.add('modal-img');
-    imageElement.setAttribute('src', item.imageUrl);
+    var $imageElement = $('<img class="modal-img"></img>');
+    $imageElement.attr('src', item.imageUrl);
 
     //pokemon height
-    var heightElement = document.createElement('p');
-    heightElement.innerText = 'Height: ' + item.height + 'm';
-
+    var $heightElement = $('<p>Height: ' + item.height + 'm</p>');
+  
     //pokemon type
-    var typeElement = document.createElement('p');
-    typeElement.innerText = 'Type(s): ' + item.types
+    var $typeElement = $('<p>Type(s): ' + item.types + '</p>');
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(nameElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(typeElement);
-    $modalContainer.append(modal);
-
-    $modalContainer.addClass('is-visible');
+    $modal.append($closeButtonElement);
+    $modal.append($nameElement);
+    $modal.append($imageElement);
+    $modal.append($heightElement);
+    $modal.append($typeElement);
+    
+    $modalContainer.append($modal).addClass('is-visible');
   }
 
   //Function to hide modal 
@@ -58,10 +51,8 @@ var pokeRepository = (function() {
   });
 
   //close modal when user clicks outside the modal
-  // DOES NOT WORK!!!
   $(window).click((e) =>{
-    var target = $('e.target');
-    if (target.is($modalContainer)) {
+    if ($(e.target).is($modalContainer)) {
       hideModal();
     }
   });
@@ -80,12 +71,12 @@ var pokeRepository = (function() {
 
   //Event listener for button click
   function buttonClick (button, pokemon) {
-    button.on('click', function() {
+    button.click(() => {
         showDetails(pokemon);
       });
     }
 
-  //Fetch data from API and add(pokemon) to repository
+  //Fetch data from API and add(pokemon) to repository (asynch)
   function loadList() {
     return $.ajax(apiUrl).then(function(json) {
       json.results.forEach(function(item) {
@@ -101,7 +92,7 @@ var pokeRepository = (function() {
     })
   }
 
-  //Load detailed data for a given Pokemon
+  //Load detailed data for a given Pokemon (asynch)
   function loadDetails(item) {
     var url = item.detailsUrl;
     return $.ajax(url).then(function(details) {
@@ -120,8 +111,7 @@ var pokeRepository = (function() {
   //Show pokemon details
   function showDetails(pokemon) { 
     pokeRepository.loadDetails(pokemon).then(function() {
-      console.log(pokemon);
-      //ADD MODAL FUNCTIONALITY HERE!
+      // console.log(pokemon);
       showModal(pokemon);
     });
   }
