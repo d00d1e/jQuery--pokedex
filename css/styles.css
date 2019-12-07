@@ -9,46 +9,90 @@ body {
 
 }
 
-#close-button{
-    text-align: right;
-}
-
-#pokemon-button {
-    margin: 4px;
-    padding: 9px;
-    width: 150px;
-    color: black;
-    background-color: lightgray;
-    font-size: 18px;
-}
-
-#pokemon-button:hover {
-    background-color: darkgrey;
-    border: none;
-}
-
 .main {
-    margin-top: 20px;
-}
-
-.modal-img {
-    width: 150px;
-}
-
-.navbar {
-    height: 90px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .page_header {
-    margin-top: 50px;
+    margin: auto;
 	width: 100%;
-    padding: 20px;
+	padding: 20px;
     border-bottom: 1px solid lightgray;
     font-size: 20px;
 }
 
-.modal-body {
-    font-size: 18px;
-    line-height: 10px;
+.pokemon-list {
+    list-style-type: none;
 }
 
+.pokemon-button {
+    background-color: #e7e7e7;
+    width: 125px;
+    float: left;
+    padding: 10px 24px;
+    margin: 5px;
+    border-radius: 8px; 
+    font-size: 18px;
+}
+
+.pokemon-button:hover {
+    background-color: white;
+}
+
+
+/* MODAL  */
+#modal-container {
+    display: none;
+}
+
+#modal-container.is-visible {
+    display: block;
+    float: center;
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.5);
+    z-index: 999; /* show it above other content */
+    overflow: auto; /* allow scrolling if screen is not high enough */
+    text-align: center;
+}
+
+.modal {
+    margin: auto;
+    display: inline-block;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 15px;
+    width: 50%;
+    max-width: 400px;
+    max-height: 250px;
+    text-align: center;
+    border-radius: 8%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-close {
+    float: right;
+    -webkit-appearance: none;
+    border: 0;
+    background: none;
+    color: #777;
+    text-decoration: underline;
+  }
+
+  .modal h1 {
+    margin-top: 0;
+  }
+  
+  .modal p {
+    margin-bottom: 0;
+    font-size: 18px;
+  }
