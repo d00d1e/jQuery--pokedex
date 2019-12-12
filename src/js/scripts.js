@@ -16,18 +16,24 @@ var pokeRepository = (function() {
     //pokemon name
     var $nameElement = $('<h3>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</h3>');
 
-    //pokemon image
+    //pokemon image-front
     var $imageElement = $('<img class="modal-img">');
     $imageElement.attr('src', item.imageUrl);
+
+    //pokemon image-back
+    var $imageElementBack = $('<img class="modal-img">');
+    $imageElementBack.attr('src', item.imageUrlBack);
 
     //pokemon height
     var $heightElement = $('<p>Height: ' + item.height + 'm</p>');
   
     //pokemon type
     var $typeElement = $('<p>Type(s): ' + item.types + '</p>');
+    
+    var $abilityElement = $('<p>Ability(s): ' + item.abilities + '</p>');
 
     $modalTitle.append($nameElement);
-    $modalBody.append($imageElement, $heightElement, $typeElement);    
+    $modalBody.append($imageElement, $imageElementBack, $heightElement, $typeElement, $abilityElement);    
   }
 
   //Add new pokemon and corresponding button
@@ -68,10 +74,15 @@ var pokeRepository = (function() {
     return $.ajax(url).then(function(details) {
       //add details to the item
       item.imageUrl = details.sprites.front_default;
+      item.imageUrlBack = details.sprites.back_default;
       item.height = details.height;
       item.types = [];
       for (var i = 0; i < details.types.length; i++){
         item.types.push(details.types[i].type.name);
+      }
+      item.abilities = [];
+      for (var i = 0; i < details.abilities.length; i++){
+        item.abilities.push(details.abilities[i].ability.name);
       }
     }).catch(function(e) {
       console.error(e);
