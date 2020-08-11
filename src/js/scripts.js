@@ -1,103 +1,110 @@
 //IIFE- prevents assessing of variables globally
-var pokeRepository = (function() {
-  var repository = [];
-  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  var $modalContainer = $('#modal-container');
+const pokeRepository = (() => {
+  const repository = [];
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
+  const $modalContainer = $('#modal-container');
   
-  //MODAL control
+  //MODAL CONTROL
   //show and specify content for modal
-  function showModal(item) {
-    var $modalTitle = $('.modal-title');
-    var $modalBody = $('.modal-body');
+  showModal = (item) => {
+    const $modalTitle = $('.modal-title');
+    const $modalBody = $('.modal-body');
     
     $modalTitle.empty();
     $modalBody.empty();
 
     //pokemon name
-    var $nameElement = $('<h3>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</h3>');
+    const $nameElement = $('<h3>' + item.name.charAt(0).toUpperCase() + item.name.slice(1) + '</h3>');
 
     //pokemon image-front
-    var $imageElement = $('<img class="modal-img">');
+    const $imageElement = $('<img class="modal-img">');
     $imageElement.attr('src', item.imageUrl);
 
     //pokemon image-back
-    var $imageElementBack = $('<img class="modal-img">');
+    const $imageElementBack = $('<img class="modal-img">');
     $imageElementBack.attr('src', item.imageUrlBack);
 
     //pokemon height
-    var $heightElement = $('<p>Height: ' + item.height + 'm</p>');
+    const $heightElement = $('<p>Height: ' + item.height + 'm</p>');
   
     //pokemon type
-    var $typeElement = $('<p>Type(s): ' + item.types + '</p>');
+    const $typeElement = $('<p>Type(s): ' + item.types + '</p>');
     
-    var $abilityElement = $('<p>Ability(s): ' + item.abilities + '</p>');
+    //pokemon ability
+    const $abilityElement = $('<p>Ability(s): ' + item.abilities + '</p>');
 
     $modalTitle.append($nameElement);
     $modalBody.append($imageElement, $imageElementBack, $heightElement, $typeElement, $abilityElement);    
   }
 
+
   //Add new pokemon and corresponding button
-  function addListItem(pokemon) {
-    var $pokemonList = $('.pokemon-list');
-    var $button = $('<button type="button" id="pokemon-button" class="btn btn-secondary" data-toggle="modal" data-target="#poke-modal">' + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) + '</button>');
+  addListItem = (pokemon) =>   {
+    const $pokemonList = $('.pokemon-list');
+    const $button = $('<button type="button" id="pokemon-button" class="btn btn-secondary" data-toggle="modal" data-target="#poke-modal">' + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) + '</button>');
     
     $pokemonList.append($button);
-
     buttonClick($button, pokemon);
   }
 
+
   //Event listener for button click
-  function buttonClick (button, pokemon) {
+  buttonClick = (button, pokemon) => {
     button.click(() => {
         showDetails(pokemon);
       });
     }
 
+  
   //Fetch data from API and add(pokemon) to repository (asynch)
-  function loadList() {
-    return $.ajax(apiUrl).then(function(json) {
-      json.results.forEach(function(item) {
-        var pokemon = {
+  loadList = () => {
+    return $.ajax(apiUrl).then((json) => {
+      json.results.forEach((item) => {
+        const pokemon = {
           name: item.name,
           detailsUrl: item.url
         };
         add(pokemon);
       });
-    }).catch(function(e) {
+    }).catch((e) => {
       console.error(e);
     })
   }
 
+
   //Load detailed data for a given Pokemon (asynch)
-  function loadDetails(item) {
-    var url = item.detailsUrl;
-    return $.ajax(url).then(function(details) {
+  loadDetails = (item) => {
+    const url = item.detailsUrl;
+
+    return $.ajax(url).then((details) => {
       //add details to the item
       item.imageUrl = details.sprites.front_default;
       item.imageUrlBack = details.sprites.back_default;
       item.height = details.height;
       item.types = [];
-      for (var i = 0; i < details.types.length; i++){
+      for (let i = 0; i < details.types.length; i++){
         item.types.push(details.types[i].type.name);
       }
       item.abilities = [];
-      for (var i = 0; i < details.abilities.length; i++){
+      for (let i = 0; i < details.abilities.length; i++){
         item.abilities.push(details.abilities[i].ability.name);
       }
-    }).catch(function(e) {
+    }).catch((e) => {
       console.error(e);
     })
   }
 
+
   //Show pokemon details
-  function showDetails(pokemon) { 
-    pokeRepository.loadDetails(pokemon).then(function() {
+  showDetails = (pokemon) => { 
+    pokeRepository.loadDetails(pokemon).then(() => {
       showModal(pokemon);
     });
   }
 
+
   //Add a pokemon to repository
-  function add(pokemon) {
+  add = (pokemon) => {
     //add conditional for format --- VALIDATING KEYS 
     // (REVIEW AGAIN)
     if (typeof pokemon === 'object') {
@@ -105,10 +112,12 @@ var pokeRepository = (function() {
     }
   }
   
+
   //Return all pokemon objects in array 
-  function getAll() {
+  getAll = () => {
     return repository;
   }
+
 
   //Function objects available outside IIFE
   return {
@@ -122,10 +131,12 @@ var pokeRepository = (function() {
   };
 })();
 
+
 //Load data for each item
-pokeRepository.loadList().then(function() {
+pokeRepository.loadList().then(() => {
   //Data now loaded
-  pokeRepository.getAll().forEach(function(pokemon) {
+  pokeRepository.getAll().forEach((pokemon) => {
     pokeRepository.addListItem(pokemon);
+    pokeRepository.loadDetails(pokemon);
   });
 })
