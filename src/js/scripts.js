@@ -2,14 +2,13 @@
 const pokeRepository = (() => {
   const repository = [];
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  const $modalContainer = $('#modal-container');
-  
+
   //MODAL CONTROL
   //show and specify content for modal
   showModal = (item) => {
     const $modalTitle = $('.modal-title');
     const $modalBody = $('.modal-body');
-    
+
     $modalTitle.empty();
     $modalBody.empty();
 
@@ -26,15 +25,15 @@ const pokeRepository = (() => {
 
     //pokemon height
     const $heightElement = $('<p>Height: ' + item.height + 'm</p>');
-  
+
     //pokemon type
     const $typeElement = $('<p>Type(s): ' + item.types + '</p>');
-    
+
     //pokemon ability
     const $abilityElement = $('<p>Ability(s): ' + item.abilities + '</p>');
 
     $modalTitle.append($nameElement);
-    $modalBody.append($imageElement, $imageElementBack, $heightElement, $typeElement, $abilityElement);    
+    $modalBody.append($imageElement, $imageElementBack, $heightElement, $typeElement, $abilityElement);
   }
 
 
@@ -42,7 +41,7 @@ const pokeRepository = (() => {
   addListItem = (pokemon) =>   {
     const $pokemonList = $('.pokemon-list');
     const $button = $('<button type="button" id="pokemon-button" class="btn btn-secondary" data-toggle="modal" data-target="#poke-modal">' + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) + '</button>');
-    
+
     $pokemonList.append($button);
     buttonClick($button, pokemon);
   }
@@ -55,8 +54,8 @@ const pokeRepository = (() => {
       });
     }
 
-  
-  //Fetch data from API and add(pokemon) to repository (asynch)
+
+  //Fetch data from API and add(pokemon) to repository (async)
   loadList = () => {
     return $.ajax(apiUrl).then((json) => {
       json.results.forEach((item) => {
@@ -96,7 +95,7 @@ const pokeRepository = (() => {
 
 
   //Show pokemon details
-  showDetails = (pokemon) => { 
+  showDetails = (pokemon) => {
     pokeRepository.loadDetails(pokemon).then(() => {
       showModal(pokemon);
     });
@@ -105,15 +104,15 @@ const pokeRepository = (() => {
 
   //Add a pokemon to repository
   add = (pokemon) => {
-    //add conditional for format --- VALIDATING KEYS 
+    //add conditional for format --- VALIDATING KEYS
     // (REVIEW AGAIN)
     if (typeof pokemon === 'object') {
       repository.push(pokemon);
     }
   }
-  
 
-  //Return all pokemon objects in array 
+
+  //Return all pokemon objects in array
   getAll = () => {
     return repository;
   }
@@ -121,20 +120,19 @@ const pokeRepository = (() => {
 
   //Function objects available outside IIFE
   return {
-    add: add,
-    getAll: getAll,
-    addListItem: addListItem,
-    loadList: loadList,
-    loadDetails: loadDetails,
-    showDetails: showDetails,
-    showModal: showModal,
+    add,
+    getAll,
+    addListItem,
+    loadList,
+    loadDetails,
+    showDetails,
+    showModal,
   };
 })();
 
 
 //Load data for each item
 pokeRepository.loadList().then(() => {
-  //Data now loaded
   pokeRepository.getAll().forEach((pokemon) => {
     pokeRepository.addListItem(pokemon);
     pokeRepository.loadDetails(pokemon);
