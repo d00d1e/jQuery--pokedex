@@ -1,17 +1,11 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "VT323", monospace;
-  overflow: hidden;
-  height: 100%;
 }
 
 body {
   text-align: center;
   padding: 50px;
-  overflow: auto;
-  height: 100%;
 }
 
 #close-button {
@@ -37,18 +31,18 @@ body {
 }
 
 .modal-img {
-  width: 250px;
+  width: 150px;
 }
 
 .navbar {
-  height: 190px;
+  height: 90px;
 }
 
 .page_header {
   margin-top: 50px;
   width: 100%;
   padding: 20px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   font-size: 20px;
 }
 
