@@ -101,7 +101,6 @@ const pokeRepository = (() => {
     });
   }
 
-
   //Add a pokemon to repository
   add = (pokemon) => {
     //add conditional for format --- VALIDATING KEYS
@@ -137,4 +136,4 @@ pokeRepository.loadList().then(() => {
     pokeRepository.addListItem(pokemon);
     pokeRepository.loadDetails(pokemon);
   });
-})
+});
