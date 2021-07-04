@@ -1,46 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="shortcut icon" type="image/png" href="src/img/pokemon.png">
-	<title>Pokédex</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323&display=swap">
-	<!-- Bootstrap -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="src/css/styles.css"/>
-</head>
-<body>
-	<!-- Navbar  -->
-	<nav class="navbar fixed-top navbar-light bg-light">
-		<a class="navbar-brand" href="#"><h1>POKÉDEX</h1></a>
-	</nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/png" href="src/img/pokemon.png" />
+    <title>Pokédex</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=VT323&display=swap"
+    />
+    <!-- Bootstrap -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
+  </head>
 
-	<header class="page_header"><h3>Gen. 1</h3></header>
+  <body>
+    <!-- Navbar  -->
+    <nav class="navbar fixed-top navbar-light">
+      <a class="navbar-brand" href="#">
+        <h1>POKÉDEX</h1>
+      </a>
+    </nav>
 
-	<div class="main container">
-		<div class="row">
-			<ul class='pokemon-list list-unstyled'></ul>
-		</div>
-	</div>
+    <header class="page_header">
+      <h3>Gen. 1 Pokémon</h3>
+    </header>
 
-	<!-- Bootstrap modal  -->
-	<div class="modal fade" id="poke-modal" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered" >
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title"></h3>
-					<button type="button" class="btn btn-default" id="close-button" data-dismiss="modal" aria-label="Close"> &times; </button>
-				</div>
-				<div class="modal-body">
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="main container">
+      <div class="row">
+        <ul class="pokemon-list list-unstyled"></ul>
+      </div>
+    </div>
 
-	<script src="src/js/scripts.js"></script>
-</body>
+    <!-- Bootstrap modal  -->
+    <div class="modal fade" id="poke-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title"></h3>
+            <button
+              type="button"
+              class="btn btn-default"
+              id="close-button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/scripts.js"></script>
+  </body>
 </html>
